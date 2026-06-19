@@ -4,50 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94be05a3-1741-4ba6-b166-57671e0bf72e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Clases/ComprobanteFinanciero.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Clases/Factura.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Clases/GastoOperativo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Gestion/GestionFinanciera.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Gestion/NodoFactura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Clases/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Clases/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/Persona.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gestion/GestionClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/GestionClientes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vista/Ventana.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vista/Ventana.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vista/Ventana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vista/Ventana.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Clases/Cliente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Clases/Persona.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Clases/Producto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Gestion/GestionClientes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Gestion/GestionInventario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/Vista/Ventana.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/Proyecto_Integrador_Programacion3/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
-    </list>
+    <list default="true" id="94be05a3-1741-4ba6-b166-57671e0bf72e" name="Changes" comment="a" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,6 +33,7 @@
     "Application.Ventana.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "163",
     "git-widget-placeholder": "main",
@@ -98,6 +56,28 @@
       <option name="presentableId" value="Default" />
       <updated>1781657575341</updated>
     </task>
+    <task id="LOCAL-00001" summary="A">
+      <option name="closed" value="true" />
+      <created>1781841624598</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1781841624598</updated>
+    </task>
+    <task id="LOCAL-00002" summary="a">
+      <option name="closed" value="true" />
+      <created>1781841647869</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1781841647869</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="A" />
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
 </project>
