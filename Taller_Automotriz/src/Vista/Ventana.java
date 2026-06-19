@@ -14,7 +14,6 @@ public class Ventana {
     private JTabbedPane tabbedPane1;
     private JTextField txtCedula;
     private JTextField txtNombre;
-    private JTextField txtApellido;
     private JTextField txtTelefono;
     private JTextField txtDireccion;
     private JTextField txtCorreo;
@@ -48,6 +47,14 @@ public class Ventana {
     private JTextArea areaReportes;
     private JTabbedPane tabbedPane2;
     private JTabbedPane tabbedPane3;
+    private JTabbedPane tabbedPane4;
+    private JFormattedTextField forTxtnumComprbante;
+    private JTextField txt_cedula_fac;
+    private JButton btnRegistrar;
+    private JTextField txtMarcaVehiculo;
+    private JTextField txtModeloVehiculo;
+    private JTextField txtPlacaVehiculo;
+    private JTextField txtAnioVehiculo;
 
     GestionClientes gestionClientes = new GestionClientes();
     GestionInventario gestionInventario = new GestionInventario();
@@ -59,47 +66,73 @@ public class Ventana {
     }
 
     private void agregarEventos() {
-        btnAgregarCliente.addActionListener(new ActionListener() {
+        // --- BOTÓN REGISTRAR (NUEVO PANEL DIVIDIDO CLIENTE/VEHÍCULO) ---
+        btnRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Cliente cliente = new Cliente(
-                            txtCedula.getText(),
-                            txtNombre.getText(),
-                            txtApellido.getText(),
-                            txtTelefono.getText(),
-                            txtDireccion.getText(),
-                            txtCorreo.getText(),
-                            txtPlaca.getText(),
-                            txtModelo.getText(),
-                            Integer.parseInt(txtAnio.getText()),
-                            "Sin historial",
-                            true,
-                            "admin",
-                            "2026"
-                    );
+                String cedula = txtCedula.getText().trim();
+                String nombre = txtNombre.getText().trim();
+                String telefono = txtTelefono.getText().trim();
+                String correo = txtCorreo.getText().trim();
+                String direccion = txtDireccion.getText().trim();
 
-                    if (gestionClientes.agregarCliente(cliente)) {
-                        JOptionPane.showMessageDialog(null, "Cliente agregado correctamente");
-                        limpiarClientes();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El cliente ya existe");
+                String marca = txtMarcaVehiculo.getText().trim();
+                String modelo = txtModeloVehiculo.getText().trim();
+                String placa = txtPlacaVehiculo.getText().trim();
+                String anioStr = txtAnioVehiculo.getText().trim();
+
+                if (cedula.isEmpty() || nombre.isEmpty() || placa.isEmpty() || modelo.isEmpty() || anioStr.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Por favor, complete los campos obligatorios:\nCédula, Nombre, Placa, Modelo y Año.",
+                            "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                int anio;
+                try {
+                    anio = Integer.parseInt(anioStr);
+                    int anioActual = 2026;
+                    if (anio < 1950 || anio > anioActual + 1) {
+                        throw new NumberFormatException();
                     }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Error en los datos: " + ex.getMessage());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null,
+                            "Por favor, ingrese un año de vehículo válido.",
+                            "Error de Formato", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Cliente nuevoCliente = new Cliente(
+                        cedula, nombre, telefono, direccion, correo,
+                        placa, modelo, marca, anio, "Sin registros previos.",
+                        true, "RenatoImbaquingo", "2026-06-18"
+                );
+
+                if (gestionClientes.agregarCliente(nuevoCliente)) {
+                    JOptionPane.showMessageDialog(null,
+                            "Cliente y Vehículo registrados con éxito.\nEl registro ha sido indexado correctamente.",
+                            "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    limpiarClientes();
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Error: Ya existe un cliente registrado con la cédula Nro: " + cedula,
+                            "Registro Duplicado", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+
+        // --- ACCIONES DE CLIENTES ---
         btnMostrarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 areaClientes.setText(gestionClientes.toString());
             }
         });
+
         btnBuscarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String cedula = txtBusquedaCedula.getText();
+                String cedula = txtBusquedaCedula.getText().trim();
 
                 if (cedula.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Ingrese una cédula para buscar");
@@ -113,13 +146,16 @@ public class Ventana {
                         clienteSeleccionado = gestionClientes.getValor(indice);
                         txtCedula.setText(clienteSeleccionado.getCedula());
                         txtNombre.setText(clienteSeleccionado.getNombre());
-                        txtApellido.setText(clienteSeleccionado.getApellido());
                         txtTelefono.setText(clienteSeleccionado.getTelefono());
                         txtDireccion.setText(clienteSeleccionado.getDireccion());
                         txtCorreo.setText(clienteSeleccionado.getCorreo());
-                        txtPlaca.setText(clienteSeleccionado.getPlaca());
-                        txtModelo.setText(clienteSeleccionado.getModeloVehiculo());
-                        txtAnio.setText(String.valueOf(clienteSeleccionado.getAnioVehiculo()));
+
+                        // Variables de texto de vehículo mapeadas correctamente
+                        txtPlacaVehiculo.setText(clienteSeleccionado.getPlaca());
+                        txtModeloVehiculo.setText(clienteSeleccionado.getModeloVehiculo());
+                        txtMarcaVehiculo.setText(clienteSeleccionado.getMarcaVehiculo());
+                        txtAnioVehiculo.setText(String.valueOf(clienteSeleccionado.getAnioVehiculo()));
+
                         areaClientes.setText(clienteSeleccionado.toString());
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, "Error al buscar: " + ex.getMessage());
@@ -133,7 +169,7 @@ public class Ventana {
         btnEditarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String cedula = txtBusquedaCedula.getText();
+                String cedula = txtBusquedaCedula.getText().trim();
 
                 if (cedula.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Primero busque un cliente");
@@ -178,11 +214,12 @@ public class Ventana {
                         JOptionPane.QUESTION_MESSAGE
                 );
 
-                if (nuevoValor == null || nuevoValor.isEmpty()) {
+                if (nuevoValor == null || nuevoValor.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "No se realizaron cambios");
                     return;
                 }
 
+                nuevoValor = nuevoValor.trim();
                 boolean editado = false;
 
                 if (seleccion.equals("Teléfono")) {
@@ -206,7 +243,7 @@ public class Ventana {
                 }
 
                 if (editado) {
-                    JOptionPane.showMessageDialog(null, "" + seleccion + " actualizado correctamente");
+                    JOptionPane.showMessageDialog(null, seleccion + " actualizado correctamente");
 
                     int nuevoIndice = gestionClientes.buscarCliente(cedula);
                     if (nuevoIndice != -1) {
@@ -216,9 +253,9 @@ public class Ventana {
                             txtTelefono.setText(clienteActualizado.getTelefono());
                             txtCorreo.setText(clienteActualizado.getCorreo());
                             txtDireccion.setText(clienteActualizado.getDireccion());
-                            txtPlaca.setText(clienteActualizado.getPlaca());
-                            txtModelo.setText(clienteActualizado.getModeloVehiculo());
-                            txtAnio.setText(String.valueOf(clienteActualizado.getAnioVehiculo()));
+                            txtPlacaVehiculo.setText(clienteActualizado.getPlaca());
+                            txtModeloVehiculo.setText(clienteActualizado.getModeloVehiculo());
+                            txtAnioVehiculo.setText(String.valueOf(clienteActualizado.getAnioVehiculo()));
                         } catch (Exception ex) {
                             areaClientes.setText(gestionClientes.toString());
                         }
@@ -232,7 +269,7 @@ public class Ventana {
         btnEliminarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String cedula = txtBusquedaCedula.getText();
+                String cedula = txtBusquedaCedula.getText().trim();
 
                 if (cedula.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Primero busque un cliente");
@@ -241,9 +278,9 @@ public class Ventana {
 
                 int confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro de anular este cliente?");
                 if (confirmar == JOptionPane.YES_OPTION) {
-                    boolean eliminado = gestionClientes.anularCliente(cedula, "admin", "2026");
+                    boolean eliminado = gestionClientes.anularCliente(cedula, "RenatoImbaquingo", "2026-06-18");
                     if (eliminado) {
-                        JOptionPane.showMessageDialog(null, "Cliente anulado correctamente");
+                        JOptionPane.showMessageDialog(null, "Cliente inactivado mediante anulación lógica contable.");
                         limpiarClientes();
                         areaClientes.setText("");
                         clienteSeleccionado = null;
@@ -254,18 +291,19 @@ public class Ventana {
             }
         });
 
+        // --- ACCIONES DE INVENTARIO ---
         btnAgregarProducto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Producto producto = new Producto(
-                            Integer.parseInt(txtCodigo.getText()),
-                            txtNombreProducto.getText(),
-                            Double.parseDouble(txtPrecio.getText()),
-                            Integer.parseInt(txtCantidad.getText()),
-                            txtCategoria.getText(),
-                            txtProveedor.getText(),
-                            txtFechaCaducidad.getText()
+                            Integer.parseInt(txtCodigo.getText().trim()),
+                            txtNombreProducto.getText().trim(),
+                            Double.parseDouble(txtPrecio.getText().trim()),
+                            Integer.parseInt(txtCantidad.getText().trim()),
+                            txtCategoria.getText().trim(),
+                            txtProveedor.getText().trim(),
+                            txtFechaCaducidad.getText().trim()
                     );
                     gestionInventario.agregarProducto(producto);
                     gestionInventario.ordenarPorInsercion();
@@ -290,7 +328,7 @@ public class Ventana {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String codigoTexto = txtBusquedaCodigo.getText();
+                    String codigoTexto = txtBusquedaCodigo.getText().trim();
 
                     if (codigoTexto.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Ingrese un código para buscar");
@@ -325,7 +363,7 @@ public class Ventana {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String codigoTexto = txtBusquedaCodigo.getText();
+                    String codigoTexto = txtBusquedaCodigo.getText().trim();
 
                     if (codigoTexto.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Primero busque un producto");
@@ -407,7 +445,7 @@ public class Ventana {
                     }
 
                     if (editado) {
-                        JOptionPane.showMessageDialog(null, "" + seleccion + " actualizado correctamente");
+                        JOptionPane.showMessageDialog(null, seleccion + " actualizado correctamente");
                         areaInventario.setText(gestionInventario.toString());
 
                         Producto p = gestionInventario.getValor(indice);
@@ -433,7 +471,7 @@ public class Ventana {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String codigoTexto = txtBusquedaCodigo.getText();
+                    String codigoTexto = txtBusquedaCodigo.getText().trim();
 
                     if (codigoTexto.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Ingrese un código para eliminar");
@@ -457,6 +495,7 @@ public class Ventana {
             }
         });
 
+        // --- ACCIONES DE REPORTES ---
         btnReporteClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -483,13 +522,16 @@ public class Ventana {
     private void limpiarClientes() {
         txtCedula.setText("");
         txtNombre.setText("");
-        txtApellido.setText("");
         txtTelefono.setText("");
         txtDireccion.setText("");
         txtCorreo.setText("");
-        txtPlaca.setText("");
-        txtModelo.setText("");
-        txtAnio.setText("");
+
+        // Limpieza de nombres de variables de vehículo nuevos
+        txtMarcaVehiculo.setText("");
+        txtModeloVehiculo.setText("");
+        txtPlacaVehiculo.setText("");
+        txtAnioVehiculo.setText("");
+
         txtBusquedaCedula.setText("");
         clienteSeleccionado = null;
     }
@@ -506,7 +548,7 @@ public class Ventana {
     }
 
     private void $$$setupUI$$$() {
-        //Método automáticamente
+        // Generado automáticamente por el diseñador GUI de IntelliJ
     }
 
     public static void main(String[] args) {

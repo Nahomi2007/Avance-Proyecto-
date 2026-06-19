@@ -159,7 +159,7 @@ public class GestionClientes {
                 sb.append("│ Cliente #").append(contador).append("\n");
                 sb.append("├────────────────────────────────────────────────────────┤\n");
                 sb.append("│ Cédula:    ").append(cliente.getCedula()).append("\n");
-                sb.append("│ Nombre:    ").append(cliente.getNombre()).append(" ").append(cliente.getApellido()).append("\n");
+                sb.append("│ Nombre:    ").append(cliente.getNombre()).append("\n");
                 sb.append("│ Teléfono:  ").append(cliente.getTelefono()).append("\n");
                 sb.append("│ Dirección: ").append(cliente.getDireccion()).append("\n");
                 sb.append("│ Correo:    ").append(cliente.getCorreo()).append("\n");

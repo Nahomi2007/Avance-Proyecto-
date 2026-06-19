@@ -4,6 +4,7 @@ public class Cliente extends Persona {
     /** Creacion de los parametros */
     private String placa;
     private String modeloVehiculo;
+    private String marcaVehiculo;
     private int anioVehiculo;
     private String historialServicio;
 
@@ -14,19 +15,20 @@ public class Cliente extends Persona {
     private String usuarioModificacion;
     private String fechaModificacion;
 
-    /** Creacion del constructor */
-
-    public Cliente(String cedula, String nombre, String apellido, String telefono, String direccion, String correo, String placa, String modeloVehiculo, int anioVehiculo, String historialServicio, boolean activo, String usuarioModificacion, String fechaModificacion) {
-        super(cedula, nombre, apellido, telefono, direccion, correo);
+    public Cliente(String cedula, String nombre, String telefono, String direccion, String correo, String placa, String modeloVehiculo, String marcaVehiculo, int anioVehiculo, String historialServicio, boolean activo, String usuarioModificacion, String fechaModificacion) {
+        super(cedula, nombre, telefono, direccion, correo);
         this.placa = placa;
         this.modeloVehiculo = modeloVehiculo;
+        this.marcaVehiculo = marcaVehiculo;
         this.anioVehiculo = anioVehiculo;
         this.historialServicio = historialServicio;
         this.activo = activo;
         this.usuarioModificacion = usuarioModificacion;
         this.fechaModificacion = fechaModificacion;
     }
-    /** Getters and Setters */
+
+    /** Creacion del constructor */
+
     public String getPlaca() {
         return placa;
     }
@@ -41,6 +43,14 @@ public class Cliente extends Persona {
 
     public void setModeloVehiculo(String modeloVehiculo) {
         this.modeloVehiculo = modeloVehiculo;
+    }
+
+    public String getMarcaVehiculo() {
+        return marcaVehiculo;
+    }
+
+    public void setMarcaVehiculo(String marcaVehiculo) {
+        this.marcaVehiculo = marcaVehiculo;
     }
 
     public int getAnioVehiculo() {
@@ -83,22 +93,22 @@ public class Cliente extends Persona {
         this.fechaModificacion = fechaModificacion;
     }
 
-    /** Getters y Setters */
-
+    /** Getters and Setters */
 
 
     @Override
     public String toString() {
 
-        return "Cliente :" +
+        return "__________DATOS DEL CLIENTE_________" +
                 "\nNombre: " + nombre +
-                "\nApellido: " + apellido +
                 "\nCedula: " + cedula +
                 "\nTelefono: " + telefono +
                 "\nDireccion: " + direccion +
                 "\nCorreo: " + correo +
+                "\n________DATOS DEL VEHICULO_______"+
                 "\nPlaca: " + placa +
-                "\nModelo Vehiculo: " + modeloVehiculo +
+                "\nMarca: " + marcaVehiculo +
+                "\nModelo: " + modeloVehiculo +
                 "\nAño Vehiculo: " + anioVehiculo +
                 "\nHistorial Servicio: " + historialServicio +
                 "\nEstado: " + (activo ? "ACTIVO" : "ANULADO") +

@@ -4,16 +4,15 @@ public class Persona {
     /** Creacion de variables protegidas */
     protected String cedula;
     protected String nombre;
-    protected String apellido;
     protected String telefono;
     protected String direccion;
     protected String correo;
 
     /** Creacion de constructor */
-    public Persona(String cedula, String nombre, String apellido, String telefono, String direccion, String correo) {
+
+    public Persona(String cedula, String nombre, String telefono, String direccion, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.telefono = telefono;
         this.direccion = direccion;
         this.correo = correo;
@@ -37,12 +36,12 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getTelefono() {
@@ -51,14 +50,6 @@ public class Persona {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
 
     public String getCorreo() {
