@@ -53,7 +53,6 @@ public class Ventana {
     private JTabbedPane tabbedPane2;
     private JTabbedPane tabbedPane3;
     private JTabbedPane tabbedPane4;
-    private JFormattedTextField forTxtnumComprbante;
     private JTextField txt_cedula_fac;
     private JButton btnRegistrar;
     private JTextField txtMarcaVehiculo;
@@ -122,10 +121,23 @@ public class Ventana {
     private JLabel lblTotalCitas;
     private JLabel lblEstadoCitas;
     private JLabel lblVersionCitas;
+    private JTextField txtNoComprobante;
+    private JTextField txtCodigoOrden;
+    private JButton btnFactCliente;
+    private JTextArea txtADetallesOrden;
+    private JTextField txtSubtotal;
+    private JTextField txtIVA;
+    private JTextField txtTotal;
+    private JButton generarFacturaButton;
+    private JComboBox cbMetedoPago;
+    private JTextField txtBuscarCIfac;
+    private JTextArea txtAFacturas;
+    private JButton btnBuscarFactura;
 
     GestionOrdenesServicio gestionOrdenes = new GestionOrdenesServicio();
     GestionClientes gestionClientes = new GestionClientes();
     GestionInventario gestionInventario = new GestionInventario();
+    private GestionFinanciera gestionFinanciera = new GestionFinanciera();
     private Cliente clienteSeleccionado = null;
 
     private GestionCitas gestionCitas;
@@ -162,6 +174,207 @@ public class Ventana {
         agregarEventos();
         configurarEventosCitas();
         configurarEventosOrdenes();
+
+        btnFactCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cedula = txt_cedula_fac.getText().trim();
+
+                if (cedula.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Ingrese la cédula del cliente.",
+                            "Campo vacío", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                int indiceCliente = gestionClientes.buscarCliente(cedula);
+                if (indiceCliente == -1) {
+                    JOptionPane.showMessageDialog(null,
+                            "No se encontró ningún cliente con la cédula: " + cedula,
+                            "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+                    txtADetallesOrden.setText("");
+                    txtSubtotal.setText("");
+                    txtIVA.setText("");
+                    txtTotal.setText("");
+                    return;
+                }
+
+                try {
+                    clienteSeleccionado = gestionClientes.getValor(indiceCliente);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,
+                            "Error al recuperar el cliente: " + ex.getMessage(),
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                OrdenServicio orden = gestionFinanciera.buscarOrdenParaFacturar(cedula, gestionOrdenes);
+                if (orden == null) {
+                    JOptionPane.showMessageDialog(null,
+                            "El cliente no tiene órdenes FINALIZADAS disponibles para facturar.",
+                            "Sin órdenes", JOptionPane.WARNING_MESSAGE);
+                    txtADetallesOrden.setText("");
+                    txtSubtotal.setText("");
+                    txtIVA.setText("");
+                    txtTotal.setText("");
+                    return;
+                }
+
+                double subtotal = gestionFinanciera.calcularSubtotalMateriales(orden);
+                double iva      = gestionFinanciera.calcularIvaAutomatizado(subtotal);
+                double total    = subtotal + iva;
+
+                StringBuilder detalles = new StringBuilder();
+                detalles.append("=== ORDEN DE TRABAJO ===\n");
+                detalles.append("Código:    ").append(orden.getCodigoOrden()).append("\n");
+                detalles.append("Cliente:   ").append(clienteSeleccionado.getNombre())
+                        .append(" (CI: ").append(cedula).append(")\n");
+                detalles.append("Servicio:  ").append(orden.getDescripcionServicio()).append("\n");
+                detalles.append("Materiales:\n");
+                if (orden.getMateriales() != null && !orden.getMateriales().isEmpty()) {
+                    for (String mat : orden.getMateriales()) {
+                        detalles.append("  - ").append(mat).append("\n");
+                    }
+                } else {
+                    detalles.append("  (sin materiales registrados)\n");
+                }
+
+                txtADetallesOrden.setText(detalles.toString());
+                txtSubtotal.setText(String.format("%.2f", subtotal));
+                txtIVA.setText(String.format("%.2f", iva));
+                txtTotal.setText(String.format("%.2f", total));
+            }
+        });
+
+        generarFacturaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (clienteSeleccionado == null) {
+                    JOptionPane.showMessageDialog(null,
+                            "Primero busque al cliente con el botón 'Buscar Cliente'.",
+                            "Sin cliente", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String subtotalTexto = txtSubtotal.getText().trim();
+                if (subtotalTexto.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "No hay datos de orden cargados. Use 'Buscar Cliente' primero.",
+                            "Sin datos", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                OrdenServicio orden = gestionFinanciera.buscarOrdenParaFacturar(
+                        clienteSeleccionado.getCedula(), gestionOrdenes);
+                if (orden == null) {
+                    JOptionPane.showMessageDialog(null,
+                            "No se encontró la orden finalizada del cliente.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                String metodoPago = (String) cbMetedoPago.getSelectedItem();
+                if (metodoPago == null || metodoPago.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Seleccione un método de pago.",
+                            "Campo vacío", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                double subtotal = Double.parseDouble(subtotalTexto);
+
+                // Generación automática del número de comprobante y clave SRI
+                String numeroComprobante = gestionFinanciera.generarSiguienteNumeroComprobante();
+                String fechaHoy = LocalDate.now().toString(); // ej: 2026-06-25
+
+                // Clave de acceso SRI de 49 dígitos: fecha(8) + tipo(2) + RUC(13) + ambiente(1) +
+                // serie(6) + secuencial(9) + codigo(8) + emision(1) + digito verificador(1)
+                String rucTaller  = "1792345678001";
+                String serie      = numeroComprobante.replace("-", "").substring(0, 6);
+                String secuencial = String.format("%09d",
+                        Integer.parseInt(numeroComprobante.replace("001-001-", "")));
+                String fechaSRI   = fechaHoy.replace("-", "").substring(6)
+                        + fechaHoy.replace("-", "").substring(4, 6)
+                        + fechaHoy.replace("-", "").substring(0, 4);
+                String claveSRI   = fechaSRI + "01" + rucTaller + "1" + serie + secuencial + "12345678" + "1" + "5";
+
+                Factura nuevaFactura = new Factura(
+                        numeroComprobante,
+                        fechaHoy,
+                        metodoPago,
+                        subtotal,
+                        0.0,       // descuento
+                        true,      // activo
+                        "",        // motivoAnulacion
+                        "Sistema", // usuarioModificacion
+                        fechaHoy,  // fechaModificacion
+                        claveSRI,
+                        clienteSeleccionado.getCedula(),
+                        orden.getCodigoOrden()
+                );
+
+                boolean exito = gestionFinanciera.emitirFactura(nuevaFactura);
+
+                if (exito) {
+                    txtNoComprobante.setText(numeroComprobante);
+                    JOptionPane.showMessageDialog(null,
+                            "✅ Factura emitida correctamente.\n\n"
+                                    + "Comprobante: " + numeroComprobante + "\n"
+                                    + "Cliente:     " + clienteSeleccionado.getNombre() + "\n"
+                                    + "Total:       $" + txtTotal.getText(),
+                            "Factura generada", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Limpiar formulario para siguiente factura
+                    clienteSeleccionado = null;
+                    txtCodigoOrden.setText("");
+                    txtADetallesOrden.setText("");
+                    txtSubtotal.setText("");
+                    txtIVA.setText("");
+                    txtTotal.setText("");
+                    txtNoComprobante.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Ya existe una factura con ese número de comprobante.",
+                            "Duplicado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        btnBuscarFactura.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cedula = txtBuscarCIfac.getText().trim();
+
+                if (cedula.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Ingrese la cédula del cliente para buscar sus facturas.",
+                            "Campo vacío", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                ArrayList<Factura> todasLasFacturas = gestionFinanciera.obtenerFacturasOrdenadas();
+                StringBuilder resultado = new StringBuilder();
+                int contador = 0;
+
+                for (Factura f : todasLasFacturas) {
+                    if (f.getCi_cliente().trim().equals(cedula)) {
+                        contador++;
+                        resultado.append("──────────────────────────────────────────\n");
+                        resultado.append("FACTURA #").append(contador).append("\n");
+                        resultado.append(f.toString());
+                        resultado.append("\n");
+                    }
+                }
+
+                if (contador == 0) {
+                    txtAFacturas.setText("No se encontraron facturas para la cédula: " + cedula);
+                } else {
+                    resultado.insert(0, "=== FACTURAS DEL CLIENTE: " + cedula
+                            + " (" + contador + " encontrada(s)) ===\n\n");
+                    txtAFacturas.setText(resultado.toString());
+                }
+            }
+        });
     }
 
     private void actualizarComboMateriales() {

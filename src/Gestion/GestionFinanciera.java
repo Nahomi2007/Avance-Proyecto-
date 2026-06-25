@@ -2,33 +2,98 @@ package Gestion;
 
 import Clases.Factura;
 import Clases.GastoOperativo;
+import Clases.OrdenServicio;
+import Clases.EstadoOrden;
 import java.util.ArrayList;
 
+/**
+ * Clase de Gestión Financiera encargada de controlar el flujo de caja del taller.
+ * Maneja los ingresos mediante una estructura de datos de Árbol Binario de Búsqueda (ABB)
+ * y los egresos/gastos operacionales mediante un ArrayList auxiliar.
+ * * Autoría: RenatoImbaquingo
+ * Periodo Fiscal: 2026
+ */
 public class GestionFinanciera {
+
     // Almacenamiento jerárquico dinámico para el control de ingresos (Árbol Binario de Búsqueda)
     private NodoFactura raiz;
 
     // Control y registro auxiliar de egresos del taller
     private ArrayList<GastoOperativo> listaGastos;
 
+    // Control interno para la generación automática de comprobantes secuenciales reales
+    private int secuencialFactura;
+
+    /**
+     * Constructor del Gestor Financiero.
+     * Inicia el sistema completamente limpio y listo para recibir datos transaccionales en tiempo real.
+     */
     public GestionFinanciera() {
         this.raiz = null;
         this.listaGastos = new ArrayList<>();
-        simularDatosDisponibles();
+        this.secuencialFactura = 1; // Arranca en 1 para que la primera factura sea la 00000001
+    }
+
+    // =========================================================================
+    // ENLACE DIRECTO AUTOMATIZADO CON EL MÓDULO DE ÓRDENES DE SERVICIO
+    // =========================================================================
+
+    /**
+     * Recorre el gestor de órdenes buscando una orden activa que pertenezca
+     * al cliente ingresado y que se encuentre FINALIZADA por el área técnica.
+     */
+    public OrdenServicio buscarOrdenParaFacturar(String cedulaCliente, GestionOrdenesServicio gestorOrdenes) {
+        if (gestorOrdenes == null) return null;
+
+        for (int i = 0; i < gestorOrdenes.getSize(); i++) {
+            try {
+                OrdenServicio orden = gestorOrdenes.getValor(i);
+                // Validación estricta: misma cédula, activa y concluida en el taller
+                if (orden.getCedulaCliente().trim().equals(cedulaCliente.trim())
+                        && orden.isActivo()
+                        && orden.getEstado() == EstadoOrden.FINALIZADO) {
+                    return orden;
+                }
+            } catch (Exception e) {
+                System.out.println("Error de lectura en el flujo de órdenes: " + e.getMessage());
+            }
+        }
+        return null; // No hay órdenes disponibles para liquidar
     }
 
     /**
-     * Carga de registros iniciales para demostración en memoria del sistema
+     * Calcula de forma automatizada los costos financieros asociados a los
+     * materiales e insumos registrados dinámicamente en la orden de servicio.
      */
-    private void simularDatosDisponibles() {
-        // Registro de ingresos iniciales (Se auto-ordenan por ID dentro de las ramas del árbol)
-        emitirFactura(new Factura("001-001-000000002", "2026-06-18", "Tarjeta", 50.0, 0.0, true, "", "admin", "", "CLV2", "1722222222", "ORD-02"));
-        emitirFactura(new Factura("001-001-000000001", "2026-06-18", "Efectivo", 100.0, 10.0, true, "", "admin", "", "CLV1", "1711111111", "ORD-01"));
-        emitirFactura(new Factura("001-001-000000003", "2026-06-18", "Transferencia", 200.0, 0.0, true, "", "admin", "", "CLV3", "1733333333", "ORD-03"));
+    public double calcularSubtotalMateriales(OrdenServicio orden) {
+        double subtotalMateriales = 0.0;
+        if (orden.getMateriales() != null) {
+            for (String material : orden.getMateriales()) {
+                String m = material.toLowerCase().trim();
+                // Tabulador de costos del taller mecánico (2026)
+                if (m.contains("aceite")) subtotalMateriales += 35.00;
+                else if (m.contains("filtro")) subtotalMateriales += 12.00;
+                else if (m.contains("pastilla") || m.contains("freno")) subtotalMateriales += 28.00;
+                else if (m.contains("bujia") || m.contains("bujía")) subtotalMateriales += 6.50;
+                else if (m.contains("llanta") || m.contains("neumatico")) subtotalMateriales += 75.00;
+                else subtotalMateriales += 15.00; // Tarifa base para insumos menores no tipificados
+            }
+        }
+        return subtotalMateriales;
+    }
 
-        // Registro de egresos iniciales por costos operativos del taller
-        registrarGasto(new GastoOperativo(1, "Compra de Aceite Multigrado y Filtros", 45.00, "Insumos", "2026-06-18"));
-        registrarGasto(new GastoOperativo(2, "Pago de servicio de energía eléctrica del taller", 30.00, "Servicios Básicos", "2026-06-18"));
+    /**
+     * Genera de forma incremental y segura el próximo número de comprobante secuencial exigido.
+     */
+    public String generarSiguienteNumeroComprobante() {
+        return String.format("001-001-%08d", secuencialFactura);
+    }
+
+    /**
+     * Auxiliar centralizado para el cálculo automático del impuesto fiscal (15%)
+     */
+    public double calcularIvaAutomatizado(double subtotal) {
+        return subtotal * 0.15;
     }
 
     // =========================================================================
@@ -36,13 +101,14 @@ public class GestionFinanciera {
     // =========================================================================
 
     /**
-     * Emisión y registro de una nueva factura en el árbol binario
+     * Emisión y registro de una nueva factura en el árbol binario de búsqueda
      */
     public boolean emitirFactura(Factura nueva) {
         if (buscarFactura(nueva.getId_comp()) != null) {
-            return false; // Evita duplicados de comprobantes
+            return false; // Evita la duplicidad de claves de comprobantes
         }
         raiz = insertarRecursivo(raiz, nueva);
+        secuencialFactura++; // Incrementa automáticamente la numeración tras el éxito de inserción
         return true;
     }
 
@@ -50,7 +116,7 @@ public class GestionFinanciera {
         if (actual == null) {
             return new NodoFactura(nueva);
         }
-        // Ubicación en las ramas del árbol comparando las cadenas de ID
+        // Ubicación en las ramas comparando las cadenas de caracteres correspondientes al ID
         if (nueva.getId_comp().compareTo(actual.getFactura().getId_comp()) < 0) {
             actual.setIzquierdo(insertarRecursivo(actual.getIzquierdo(), nueva));
         } else if (nueva.getId_comp().compareTo(actual.getFactura().getId_comp()) > 0) {
@@ -60,7 +126,7 @@ public class GestionFinanciera {
     }
 
     /**
-     * Búsqueda binaria recursiva optimizada sobre los nodos del árbol
+     * Búsqueda binaria recursiva optimizada sobre las claves del árbol ABB ($O(\log n)$)
      */
     public Factura buscarFactura(String id_comp) {
         NodoFactura nodoEncontrado = buscarRecursivo(raiz, id_comp);
@@ -78,7 +144,7 @@ public class GestionFinanciera {
     }
 
     /**
-     * Extracción ordenada de facturas mediante el algoritmo de recorrido Inorder
+     * Extracción ordenada ascendente de facturas mediante el algoritmo de recorrido Inorder
      */
     public ArrayList<Factura> obtenerFacturasOrdenadas() {
         ArrayList<Factura> listaPlana = new ArrayList<>();
@@ -102,7 +168,7 @@ public class GestionFinanciera {
         if (f != null && f.isActivo()) {
             f.setMet_pago(nuevoMetodo);
             f.setUsuarioModificacion(usuario);
-            f.setFechaModificacion("2026-06-18");
+            f.setFechaModificacion("2026-06-25");
             return true;
         }
         return false;
@@ -117,7 +183,7 @@ public class GestionFinanciera {
             f.setActivo(false);
             f.setMotivoAnulacion(motivo);
             f.setUsuarioModificacion(usuario);
-            f.setFechaModificacion("2026-06-18");
+            f.setFechaModificacion("2026-06-25");
             return true;
         }
         return false;
@@ -135,7 +201,7 @@ public class GestionFinanciera {
     }
 
     /**
-     * Devuelve la totalidad de los egresos registrados
+     * Devuelve la totalidad de los egresos operacionales registrados
      */
     public ArrayList<GastoOperativo> obtenerGastos() {
         return this.listaGastos;
@@ -147,7 +213,7 @@ public class GestionFinanciera {
 
     /**
      * Consolida los flujos de caja cruzando el árbol de ingresos y la lista de gastos.
-     * Genera el desglose contable, calcula la rentabilidad real del negocio y el margen de error.
+     * Genera el desglose contable, calcula la rentabilidad real y evalúa descuadres de efectivo.
      */
     public String generarCierreCajaYRentabilidad(double efectivoFisicoContado) {
         ArrayList<Factura> facturas = obtenerFacturasOrdenadas();
@@ -188,12 +254,12 @@ public class GestionFinanciera {
         double rentabilidadReal = ingresosTotales - totalEgresos;
         double margenErrorCaja = efectivoFisicoContado - totalEfectivoSistema;
 
-        // Construcción y formateo del reporte de resultados para la consola visual
+        // Construcción del reporte de resultados estructurado para el JTextArea de Balances
         StringBuilder sb = new StringBuilder();
         sb.append("===================================================\n");
         sb.append("         INFORME DE AUDITORÍA Y CIERRE DE CAJA      \n");
         sb.append("===================================================\n");
-        sb.append("Fecha de Conciliación:       2026-06-18\n");
+        sb.append("Fecha de Conciliación:       2026-06-25\n");
         sb.append("Comprobantes Emitidos:       ").append(facturasValidas).append("\n");
         sb.append("Comprobantes Anulados (Log): ").append(facturasAnuladas).append("\n");
         sb.append("---------------------------------------------------\n");

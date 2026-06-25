@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94be05a3-1741-4ba6-b166-57671e0bf72e" name="Changes" comment="a" />
+    <list default="true" id="94be05a3-1741-4ba6-b166-57671e0bf72e" name="Changes" comment="a">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Clases/GastoOperativo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/GastoOperativo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gestion/GestionFinanciera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/GestionFinanciera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vista/Ventana.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vista/Ventana.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vista/Ventana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vista/Ventana.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,8 +25,20 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Renato-im"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Nahomi2007/Avance-Proyecto-.git",
+    "accountId": "d0fff722-a3cb-4fc7-8557-381a4a87edaf"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -38,9 +57,22 @@
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "163",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ASUS/Desktop/UDLA/Programación 2/Proyectofinal/Taller_Automotriz"
+    "last_opened_file_path": "C:/Users/ASUS/Desktop/UDLA/Programación 2/Avance-Proyecto-"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Avance-Proyecto-" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Avance-Proyecto-" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

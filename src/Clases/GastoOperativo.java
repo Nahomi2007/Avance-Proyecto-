@@ -1,11 +1,11 @@
 package Clases;
 
 public class GastoOperativo {
-        private int idGasto;
-        private String descripcion;
-        private double monto;
-        private String fechaGasto;
-        private String categoria; // 'Insumos', 'Servicios Básicos', 'Nómina', etc.
+    private int idGasto;
+    private String descripcion;
+    private double monto;
+    private String fechaGasto;
+    private String categoria; // 'Insumos', 'Servicios Básicos', 'Nómina', etc.
 
     public GastoOperativo(int idGasto, String descripcion, double monto, String categoria, String fechaGasto) {
         this.idGasto = idGasto;
