@@ -97,7 +97,7 @@ public class Cliente extends Persona {
     @Override
     public String toString() {
 
-        return "========================================================" +
+        return "========================================================" + "\n" +
                 "__________DATOS DEL CLIENTE_________" +
                 "\nNombre: " + nombre +
                 "\nCedula: " + cedula +
@@ -110,7 +110,7 @@ public class Cliente extends Persona {
                 "\nModelo: " + modeloVehiculo +
                 "\nAño Vehiculo: " + anioVehiculo +
                 "\nHistorial Servicio: " + historialServicio +
-                "\nEstado: " + (activo ? "ACTIVO" : "ANULADO") +
+                "\nEstado: " + (activo ? "ACTIVO" : "ANULADO") + "\n" +
                 "========================================================" +
                 "\n";
     }

@@ -4,17 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94be05a3-1741-4ba6-b166-57671e0bf72e" name="Changes" comment="a">
+    <list default="true" id="94be05a3-1741-4ba6-b166-57671e0bf72e" name="Changes" comment="j">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Clases/Cita.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/Cita.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Clases/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Clases/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Gestion/GestionFinanciera.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Gestion/GestionFinanciera.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$25.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$26.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$27.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Taller_Automotriz/Vista/Ventana.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Clases/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Clases/ComprobanteFinanciero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/ComprobanteFinanciero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Clases/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/Factura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Clases/GastoOperativo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/GastoOperativo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gestion/GestionFinanciera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/GestionFinanciera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gestion/GestionOrdenesServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/GestionOrdenesServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vista/Ventana.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vista/Ventana.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vista/Ventana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vista/Ventana.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,12 +135,21 @@
       <option name="project" value="LOCAL" />
       <updated>1782402100185</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="j">
+      <option name="closed" value="true" />
+      <created>1782612555087</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1782612555087</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="A" />
     <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
+    <MESSAGE value="j" />
+    <option name="LAST_COMMIT_MESSAGE" value="j" />
   </component>
 </project>
