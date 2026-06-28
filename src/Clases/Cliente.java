@@ -15,6 +15,7 @@ public class Cliente extends Persona {
     private String usuarioModificacion;
     private String fechaModificacion;
 
+    /** Creacion del constructor */
     public Cliente(String cedula, String nombre, String telefono, String direccion, String correo, String placa, String modeloVehiculo, String marcaVehiculo, int anioVehiculo, String historialServicio, boolean activo, String usuarioModificacion, String fechaModificacion) {
         super(cedula, nombre, telefono, direccion, correo);
         this.placa = placa;
@@ -27,8 +28,7 @@ public class Cliente extends Persona {
         this.fechaModificacion = fechaModificacion;
     }
 
-    /** Creacion del constructor */
-
+    /**Creacion de getters y setters*/
     public String getPlaca() {
         return placa;
     }
@@ -93,13 +93,12 @@ public class Cliente extends Persona {
         this.fechaModificacion = fechaModificacion;
     }
 
-    /** Getters and Setters */
-
-
+    /**Metodo de impresion*/
     @Override
     public String toString() {
 
-        return "__________DATOS DEL CLIENTE_________" +
+        return "========================================================" +
+                "__________DATOS DEL CLIENTE_________" +
                 "\nNombre: " + nombre +
                 "\nCedula: " + cedula +
                 "\nTelefono: " + telefono +
@@ -112,6 +111,7 @@ public class Cliente extends Persona {
                 "\nAño Vehiculo: " + anioVehiculo +
                 "\nHistorial Servicio: " + historialServicio +
                 "\nEstado: " + (activo ? "ACTIVO" : "ANULADO") +
+                "========================================================" +
                 "\n";
     }
 }

@@ -133,6 +133,8 @@ public class Ventana {
     private JTextField txtBuscarCIfac;
     private JTextArea txtAFacturas;
     private JButton btnBuscarFactura;
+    private JButton btanGenerarReportes;
+    private JTextArea txtReportes;
 
     GestionOrdenesServicio gestionOrdenes = new GestionOrdenesServicio();
     GestionClientes gestionClientes = new GestionClientes();
@@ -374,6 +376,49 @@ public class Ventana {
                     txtAFacturas.setText(resultado.toString());
                 }
             }
+        });
+
+        btanGenerarReportes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String inputEfectivo = JOptionPane.showInputDialog(null,
+                        "Ingrese el monto total de Efectivo Físico Contado en Caja (Arqueo Manual):",
+                        "Auditoría y Cierre de Caja", JOptionPane.QUESTION_MESSAGE);
+
+                if (inputEfectivo == null) {
+                    return;
+                }
+
+                double efectivoFisicoContado = 0.0;
+
+                if (!inputEfectivo.trim().isEmpty()) {
+                    try {
+                        // Reemplazamos comas por puntos para evitar errores de formato regional
+                        efectivoFisicoContado = Double.parseDouble(inputEfectivo.trim().replace(",", "."));
+
+                        if (efectivoFisicoContado < 0) {
+                            JOptionPane.showMessageDialog(null,
+                                    "El dinero físico en caja no puede ser un valor negativo.",
+                                    "Error de Validación", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null,
+                                "Por favor, ingrese un monto numérico válido (Ejemplo: 150.50).",
+                                "Formato Incorrecto", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+
+                String reporteFinal = gestionFinanciera.generarCierreCajaYRentabilidad(efectivoFisicoContado);
+
+                txtReportes.setText(reporteFinal);
+
+                JOptionPane.showMessageDialog(null,
+                        "Cierre de jornada y conciliación completada con éxito.",
+                        "Auditoría Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         });
     }
 

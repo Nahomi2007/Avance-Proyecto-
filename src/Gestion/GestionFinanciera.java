@@ -6,42 +6,19 @@ import Clases.OrdenServicio;
 import Clases.EstadoOrden;
 import java.util.ArrayList;
 
-/**
- * Clase de Gestión Financiera encargada de controlar el flujo de caja del taller.
- * Maneja los ingresos mediante una estructura de datos de Árbol Binario de Búsqueda (ABB)
- * y los egresos/gastos operacionales mediante un ArrayList auxiliar.
- * * Autoría: RenatoImbaquingo
- * Periodo Fiscal: 2026
- */
+
 public class GestionFinanciera {
 
-    // Almacenamiento jerárquico dinámico para el control de ingresos (Árbol Binario de Búsqueda)
     private NodoFactura raiz;
-
-    // Control y registro auxiliar de egresos del taller
     private ArrayList<GastoOperativo> listaGastos;
-
-    // Control interno para la generación automática de comprobantes secuenciales reales
     private int secuencialFactura;
 
-    /**
-     * Constructor del Gestor Financiero.
-     * Inicia el sistema completamente limpio y listo para recibir datos transaccionales en tiempo real.
-     */
     public GestionFinanciera() {
         this.raiz = null;
         this.listaGastos = new ArrayList<>();
-        this.secuencialFactura = 1; // Arranca en 1 para que la primera factura sea la 00000001
+        this.secuencialFactura = 1;
     }
 
-    // =========================================================================
-    // ENLACE DIRECTO AUTOMATIZADO CON EL MÓDULO DE ÓRDENES DE SERVICIO
-    // =========================================================================
-
-    /**
-     * Recorre el gestor de órdenes buscando una orden activa que pertenezca
-     * al cliente ingresado y que se encuentre FINALIZADA por el área técnica.
-     */
     public OrdenServicio buscarOrdenParaFacturar(String cedulaCliente, GestionOrdenesServicio gestorOrdenes) {
         if (gestorOrdenes == null) return null;
 
@@ -61,9 +38,7 @@ public class GestionFinanciera {
         return null; // No hay órdenes disponibles para liquidar
     }
 
-    /**
-     * Calcula de forma automatizada los costos financieros asociados a los
-     * materiales e insumos registrados dinámicamente en la orden de servicio.
+    /**Calcula de forma automatizada los costos financieros asociados a los materiales e insumos registrados dinámicamente en la orden de servicio.
      */
     public double calcularSubtotalMateriales(OrdenServicio orden) {
         double subtotalMateriales = 0.0;
@@ -82,33 +57,25 @@ public class GestionFinanciera {
         return subtotalMateriales;
     }
 
-    /**
-     * Genera de forma incremental y segura el próximo número de comprobante secuencial exigido.
-     */
+    /**Genera de forma incremental y segura el próximo número de comprobante secuencial exigido */
+
     public String generarSiguienteNumeroComprobante() {
         return String.format("001-001-%08d", secuencialFactura);
     }
 
-    /**
-     * Auxiliar centralizado para el cálculo automático del impuesto fiscal (15%)
-     */
+    /**Auxiliar centralizado para el cálculo automático del impuesto fiscal (15%)*/
+
     public double calcularIvaAutomatizado(double subtotal) {
         return subtotal * 0.15;
     }
 
-    // =========================================================================
-    // CONTROL DE INGRESOS (Estructura de Árbol ABB)
-    // =========================================================================
-
-    /**
-     * Emisión y registro de una nueva factura en el árbol binario de búsqueda
-     */
+    /** Emisión y registro de una nueva factura en el árbol binario de búsqueda*/
     public boolean emitirFactura(Factura nueva) {
         if (buscarFactura(nueva.getId_comp()) != null) {
-            return false; // Evita la duplicidad de claves de comprobantes
+            return false; /**Evita la duplicidad de claves de comprobantes*/
         }
         raiz = insertarRecursivo(raiz, nueva);
-        secuencialFactura++; // Incrementa automáticamente la numeración tras el éxito de inserción
+        secuencialFactura++; /**Incrementa automáticamente la numeración tras el éxito de inserción*/
         return true;
     }
 
@@ -116,7 +83,8 @@ public class GestionFinanciera {
         if (actual == null) {
             return new NodoFactura(nueva);
         }
-        // Ubicación en las ramas comparando las cadenas de caracteres correspondientes al ID
+
+        /**Ubicación en las ramas comparando las cadenas de caracteres correspondientes al ID*/
         if (nueva.getId_comp().compareTo(actual.getFactura().getId_comp()) < 0) {
             actual.setIzquierdo(insertarRecursivo(actual.getIzquierdo(), nueva));
         } else if (nueva.getId_comp().compareTo(actual.getFactura().getId_comp()) > 0) {
@@ -125,9 +93,7 @@ public class GestionFinanciera {
         return actual;
     }
 
-    /**
-     * Búsqueda binaria recursiva optimizada sobre las claves del árbol ABB ($O(\log n)$)
-     */
+    /**Búsqueda binaria recursiva optimizada sobre las claves del árbol ABB (O(log n)*/
     public Factura buscarFactura(String id_comp) {
         NodoFactura nodoEncontrado = buscarRecursivo(raiz, id_comp);
         return (nodoEncontrado != null) ? nodoEncontrado.getFactura() : null;
@@ -143,9 +109,7 @@ public class GestionFinanciera {
         return buscarRecursivo(actual.getDerecho(), id_comp);
     }
 
-    /**
-     * Extracción ordenada ascendente de facturas mediante el algoritmo de recorrido Inorder
-     */
+    /**Extracción ordenada ascendente de facturas mediante el algoritmo de recorrido Inorde*/
     public ArrayList<Factura> obtenerFacturasOrdenadas() {
         ArrayList<Factura> listaPlana = new ArrayList<>();
         recorridoInorder(raiz, listaPlana);
@@ -160,9 +124,7 @@ public class GestionFinanciera {
         }
     }
 
-    /**
-     * Actualización del método de pago de una factura válida
-     */
+    /**Actualización del metodo de pago de una factura válida*/
     public boolean actualizarMetodoPago(String id_comp, String nuevoMetodo, String usuario) {
         Factura f = buscarFactura(id_comp);
         if (f != null && f.isActivo()) {
@@ -174,9 +136,7 @@ public class GestionFinanciera {
         return false;
     }
 
-    /**
-     * Anulación contable lógica de un comprobante para mantener la trazabilidad de auditoría
-     */
+    /**Anulación contable lógica de un comprobante para mantener la trazabilidad de auditoría*/
     public boolean eliminarFacturaLogica(String id_comp, String motivo, String usuario) {
         Factura f = buscarFactura(id_comp);
         if (f != null) {
@@ -189,30 +149,17 @@ public class GestionFinanciera {
         return false;
     }
 
-    // =========================================================================
-    // CONTROL DE GASTOS OPERATIVOS (EGRESOS)
-    // =========================================================================
-
-    /**
-     * Inserta un nuevo gasto operativo en el registro de egresos
-     */
+    /**Inserta un nuevo gasto operativo en el registro de egresos*/
     public void registrarGasto(GastoOperativo gasto) {
         this.listaGastos.add(gasto);
     }
 
-    /**
-     * Devuelve la totalidad de los egresos operacionales registrados
-     */
+    /**Devuelve la totalidad de los egresos operacionales registrados*/
     public ArrayList<GastoOperativo> obtenerGastos() {
         return this.listaGastos;
     }
 
-    // =========================================================================
-    // AUDITORÍA FINANCIERA: CIERRE DE JORNADA, CONCILIACIÓN Y BALANCES
-    // =========================================================================
-
-    /**
-     * Consolida los flujos de caja cruzando el árbol de ingresos y la lista de gastos.
+    /**Consolida los flujos de caja cruzando el árbol de ingresos y la lista de gastos.
      * Genera el desglose contable, calcula la rentabilidad real y evalúa descuadres de efectivo.
      */
     public String generarCierreCajaYRentabilidad(double efectivoFisicoContado) {
@@ -224,7 +171,7 @@ public class GestionFinanciera {
         int facturasValidas = 0;
         int facturasAnuladas = 0;
 
-        // Desglose analítico de los métodos de pago de ingresos activos
+        /**esglose analítico de los métodos de pago de ingresos activos*/
         for (Factura f : facturas) {
             if (f.isActivo()) {
                 facturasValidas++;
@@ -244,17 +191,10 @@ public class GestionFinanciera {
             }
         }
 
-        // Procesamiento sumatorio de los egresos operacionales registrados
-        double totalEgresos = 0;
-        for (GastoOperativo g : listaGastos) {
-            totalEgresos += g.getMonto();
-        }
 
         double ingresosTotales = totalEfectivoSistema + totalTransferencias + totalTarjetas;
-        double rentabilidadReal = ingresosTotales - totalEgresos;
         double margenErrorCaja = efectivoFisicoContado - totalEfectivoSistema;
 
-        // Construcción del reporte de resultados estructurado para el JTextArea de Balances
         StringBuilder sb = new StringBuilder();
         sb.append("===================================================\n");
         sb.append("         INFORME DE AUDITORÍA Y CIERRE DE CAJA      \n");
@@ -268,12 +208,6 @@ public class GestionFinanciera {
         sb.append(" -> Canales de Transferencia:       $").append(String.format("%.2f", totalTransferencias)).append("\n");
         sb.append(" -> Transacciones por Tarjeta:      $").append(String.format("%.2f", totalTarjetas)).append("\n");
         sb.append("INGRESOS TOTALES BRUTOS:            $").append(String.format("%.2f", ingresosTotales)).append("\n");
-        sb.append("---------------------------------------------------\n");
-        sb.append("CONSOLIDACIÓN DE GASTOS OPERATIVOS:\n");
-        sb.append(" -> Egresos Reconocidos del Taller: -$").append(String.format("%.2f", totalEgresos)).append("\n");
-        sb.append("---------------------------------------------------\n");
-        sb.append("CÁLCULO DE RENTABILIDAD DEL PERIODO:\n");
-        sb.append(" => UTILIDAD NETO REAL DEL TALLER:  $").append(String.format("%.2f", rentabilidadReal)).append("\n");
         sb.append("===================================================\n");
         sb.append("        CONCILIACIÓN Y MARGEN DE ERROR DE CAJA     \n");
         sb.append("===================================================\n");

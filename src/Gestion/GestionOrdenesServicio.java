@@ -14,7 +14,7 @@ public class GestionOrdenesServicio {
         ordenes = new ArrayList<>();
     }
 
-    // AGREGAR ORDEN
+    /**Agregar Orden*/
     public boolean agregarOrden(OrdenServicio orden) {
 
         if (buscarOrden(orden.getCodigoOrden()) != -1) {
@@ -25,7 +25,7 @@ public class GestionOrdenesServicio {
         return true;
     }
 
-    // BUSCAR ORDEN
+    /**Buscar Orden*/
     public int buscarOrden(String codigoOrden) {
 
         for (int i = 0; i < ordenes.size(); i++) {
@@ -38,7 +38,7 @@ public class GestionOrdenesServicio {
         return -1;
     }
 
-    // OBTENER ORDEN
+    /**Obener Orden*/
     public OrdenServicio getValor(int indice) throws Exception {
 
         if (indice < 0 || indice >= ordenes.size()) {
@@ -48,7 +48,7 @@ public class GestionOrdenesServicio {
         return ordenes.get(indice);
     }
 
-    // CAMBIAR ESTADO
+    /**Cambiar estado*/
     public boolean actualizarEstado(String codigoOrden,
                                     EstadoOrden nuevoEstado,
                                     String usuario,
@@ -60,7 +60,7 @@ public class GestionOrdenesServicio {
 
             ordenes.get(indice).setEstado(nuevoEstado);
 
-            // Si la orden se finaliza, se registra la fecha automáticamente
+            /**Si la orden se finaliza, se registra la fecha automáticamente*/
             if (nuevoEstado == EstadoOrden.FINALIZADO) {
                 ordenes.get(indice).setFechaFinalizacion(fecha);
             }
@@ -74,7 +74,7 @@ public class GestionOrdenesServicio {
         return false;
     }
 
-    // AGREGAR OBSERVACIONES
+    /**AGREGAR OBSERVACIONES*/
     public boolean agregarObservacion(String codigoOrden,
                                       String observacion,
                                       String usuario,
@@ -94,7 +94,7 @@ public class GestionOrdenesServicio {
         return false;
     }
 
-    // ANULACIÓN LÓGICA
+    /**ANULACIÓN LÓGICA*/
     public boolean anularOrden(String codigoOrden,
                                String motivo,
                                String usuario,
@@ -116,7 +116,7 @@ public class GestionOrdenesServicio {
         return false;
     }
 
-    // LISTAR ORDENES POR TECNICO
+    /**LISTAR ORDENES POR TECNICO*/
     public String listarOrdenesPorTecnico(String cedulaTecnico) {
 
         StringBuilder sb = new StringBuilder();
@@ -149,7 +149,7 @@ public class GestionOrdenesServicio {
         return sb.toString();
     }
 
-    // REPORTE GENERAL
+    /**REPORTE GENERAL*/
     @Override
     public String toString() {
 
@@ -172,7 +172,7 @@ public class GestionOrdenesServicio {
         return sb.toString();
     }
 
-    // TAMAÑO
+    /**TAMAÑO*/
     public int getSize() {
         return ordenes.size();
     }
@@ -292,7 +292,7 @@ public class GestionOrdenesServicio {
         return sb.toString();
     }
 
-    // BUSCAR Y DEVOLVER LA ORDEN
+    /**BUSCAR Y DEVOLVER LA ORDEN*/
     public OrdenServicio buscarOrdenObjeto(String codigoOrden) {
 
         int indice = buscarOrden(codigoOrden);
@@ -304,7 +304,7 @@ public class GestionOrdenesServicio {
         return null;
     }
 
-    // ACTUALIZAR OBSERVACIONES
+    /**ACTUALIZAR OBSERVACIONES*/
     public boolean actualizarObservaciones(String codigoOrden,
                                            String observacion,
                                            String usuario,

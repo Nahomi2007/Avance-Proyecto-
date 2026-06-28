@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Cita implements Comparable<Cita> {
+    /**Declaración de atributos*/
     private int id;
     private Cliente cliente;
     private Vehiculo vehiculo;
@@ -16,6 +17,7 @@ public class Cita implements Comparable<Cita> {
     private String motivoCancelacion;
     private String usuarioCreacion;
 
+    /**Creacion del constructor*/
     public Cita(int id, Cliente cliente, Vehiculo vehiculo, String servicio, LocalDate fecha, String usuario) {
         this.id = id;
         this.cliente = cliente;
@@ -29,7 +31,7 @@ public class Cita implements Comparable<Cita> {
         this.usuarioCreacion = usuario;
     }
 
-    // ========== GETTERS ==========
+    /**Creacion de getters y setters*/
     public int getId() { return id; }
     public Cliente getCliente() { return cliente; }
     public Vehiculo getVehiculo() { return vehiculo; }
@@ -41,11 +43,9 @@ public class Cita implements Comparable<Cita> {
     public LocalDateTime getFechaCreacion() { return fechaCreacion; }
     public String getMotivoCancelacion() { return motivoCancelacion; }
     public String getUsuarioCreacion() { return usuarioCreacion; }
-
-    // ========== SETTERS ==========
     public void setHora(String hora) { this.hora = hora; }
 
-    // ========== MÉTODOS DE NEGOCIO ==========
+    /**Metodos propios*/
     public void cancelar(String motivo, String usuario) {
         this.estado = EstadoCita.CANCELADA;
         this.motivoCancelacion = motivo + " (por: " + usuario + ")";

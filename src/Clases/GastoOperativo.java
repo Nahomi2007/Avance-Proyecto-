@@ -1,12 +1,14 @@
 package Clases;
 
 public class GastoOperativo {
+    /**Declaracion de atributos*/
     private int idGasto;
     private String descripcion;
     private double monto;
     private String fechaGasto;
     private String categoria; // 'Insumos', 'Servicios Básicos', 'Nómina', etc.
 
+    /**Creacion del constructor*/
     public GastoOperativo(int idGasto, String descripcion, double monto, String categoria, String fechaGasto) {
         this.idGasto = idGasto;
         this.descripcion = descripcion;
@@ -15,6 +17,7 @@ public class GastoOperativo {
         this.fechaGasto = fechaGasto;
     }
 
+    /**Creacion de getters y setters*/
     public int getIdGasto() {
         return idGasto;
     }

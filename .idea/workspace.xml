@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94be05a3-1741-4ba6-b166-57671e0bf72e" name="Changes" comment="a">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Clases/Cita.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/Cita.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Clases/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Clases/ComprobanteFinanciero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/ComprobanteFinanciero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Clases/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/Factura.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Clases/GastoOperativo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clases/GastoOperativo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Gestion/GestionFinanciera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/GestionFinanciera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gestion/GestionOrdenesServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestion/GestionOrdenesServicio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Vista/Ventana.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vista/Ventana.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Vista/Ventana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vista/Ventana.java" afterDir="false" />
     </list>
@@ -27,18 +31,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Renato-im"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Renato-im&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Nahomi2007/Avance-Proyecto-.git",
-    "accountId": "d0fff722-a3cb-4fc7-8557-381a4a87edaf"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Nahomi2007/Avance-Proyecto-.git&quot;,
+    &quot;accountId&quot;: &quot;d0fff722-a3cb-4fc7-8557-381a4a87edaf&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -47,19 +51,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Ventana.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "163",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ASUS/Desktop/UDLA/Programación 2/Avance-Proyecto-"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Ventana.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;163&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ASUS/Desktop/UDLA/Programación 2/Avance-Proyecto-&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="Avance-Proyecto-" />
@@ -104,7 +108,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781841647869</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="a">
+      <option name="closed" value="true" />
+      <created>1782402100185</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1782402100185</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

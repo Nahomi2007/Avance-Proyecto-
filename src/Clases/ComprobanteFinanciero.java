@@ -1,6 +1,7 @@
 package Clases;
 
 public abstract class ComprobanteFinanciero {
+    /**Declaracion de atributos*/
     private String id_comp;
     private String fecha;
     private String met_pago;
@@ -12,6 +13,7 @@ public abstract class ComprobanteFinanciero {
     private String usuarioModificacion;
     private String fechaModificacion;
 
+    /**Creacion del constructor*/
     public ComprobanteFinanciero(String id_comp, String fecha, String met_pago, double subtotal, double descuento, double total, boolean activo, String motivoAnulacion, String usuarioModificacion, String fechaModificacion) {
         this.id_comp = id_comp;
         this.fecha = fecha;
@@ -25,6 +27,7 @@ public abstract class ComprobanteFinanciero {
         this.fechaModificacion = fechaModificacion;
     }
 
+    /**Creacion de getters y setters*/
     public String getId_comp() { return id_comp; }
     public void setId_comp(String id_comp) { this.id_comp = id_comp; }
 
@@ -55,5 +58,6 @@ public abstract class ComprobanteFinanciero {
     public String getMotivoAnulacion() { return motivoAnulacion; }
     public void setMotivoAnulacion(String motivoAnulacion) { this.motivoAnulacion = motivoAnulacion; }
 
+    /**Metodo abstracto*/
     public abstract void calcularImpuestosYTotal();
 }

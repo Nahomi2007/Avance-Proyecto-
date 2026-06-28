@@ -1,11 +1,13 @@
 package Clases;
 
 public class Factura extends ComprobanteFinanciero {
+    /**Declaracion de atributos*/
     private String clv_SRI;
     private String ci_cliente;
     private String code_orden;
     private double iva;
 
+    /**Creracion del constructor y metodo abstracto*/
     public Factura(String id_comp, String fecha, String met_pago, double subtotal, double descuento,
                    boolean activo, String motivoAnulacion, String usuarioModificacion, String fechaModificacion,
                    String clv_SRI, String ci_cliente, String code_orden) {
@@ -24,6 +26,7 @@ public class Factura extends ComprobanteFinanciero {
         setTotal(getSubtotal() - getDescuento() + this.iva);
     }
 
+    /**Creacion de getters y setters*/
     public String getClv_SRI() { return clv_SRI; }
     public void setClv_SRI(String clv_SRI) { this.clv_SRI = clv_SRI; }
 
@@ -36,6 +39,7 @@ public class Factura extends ComprobanteFinanciero {
     public double getIva() { return iva; }
     public void setIva(double iva) { this.iva = iva; }
 
+    /**Metodo de impresion*/
     @Override
     public String toString() {
         return "COMPROBANTE ELECTRÓNICO SRI: " + getId_comp() +
